@@ -79,13 +79,43 @@ print("\nCustomer Churn Percentage:")
 print(churn_percentage.round(2))
 
 # Visualize the customer churn distribution.
+#churn_counts = df["Churn"].value_counts()
+
+#churn_counts.plot(kind="bar", figsize=(7, 5))
+
+#plt.title("Customer Churn Distribution")
+#plt.xlabel("Customer Churn")
+#plt.ylabel("Number of Customers")
+#plt.xticks(rotation=0)
+#plt.tight_layout()
+#plt.show()
+
+# -----------------------------------------
+# Improved Churn Distribution Visualization
+# -----------------------------------------
+
+# Create a separate bar chart with customer counts.
 churn_counts = df["Churn"].value_counts()
 
-churn_counts.plot(kind="bar", figsize=(7, 5))
+fig, ax = plt.subplots(figsize=(7, 5))
 
-plt.title("Customer Churn Distribution")
-plt.xlabel("Customer Churn")
-plt.ylabel("Number of Customers")
-plt.xticks(rotation=0)
+bars = ax.bar(churn_counts.index, churn_counts.values)
+
+# Add customer counts above each bar.
+for bar in bars:
+    height = bar.get_height()
+
+    ax.text(
+        bar.get_x() + bar.get_width() / 2,
+        height,
+        str(int(height)),
+        ha="center",
+        va="bottom"
+    )
+
+ax.set_title("Customer Churn Distribution with Counts")
+ax.set_xlabel("Customer Churn")
+ax.set_ylabel("Number of Customers")
+
 plt.tight_layout()
 plt.show()
