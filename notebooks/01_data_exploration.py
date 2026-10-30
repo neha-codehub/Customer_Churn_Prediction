@@ -40,3 +40,12 @@ df.loc[df["tenure"] == 0, "TotalCharges"] = (
 # Verify that missing values have been handled.
 print("\nMissing TotalCharges after cleaning:",
       df["TotalCharges"].isnull().sum())
+
+# Verify TotalCharges for customers with zero tenure.
+zero_tenure_customers = df[df["tenure"] == 0]
+
+print("\nCustomers with zero tenure:",
+      len(zero_tenure_customers))
+
+print("\nTotalCharges for zero-tenure customers:")
+print(zero_tenure_customers["TotalCharges"])
