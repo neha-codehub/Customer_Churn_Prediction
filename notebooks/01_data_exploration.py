@@ -49,3 +49,16 @@ print("\nCustomers with zero tenure:",
 
 print("\nTotalCharges for zero-tenure customers:")
 print(zero_tenure_customers["TotalCharges"])
+
+# df.info() displays the original data types, not the cleaned data types.
+#display the updated information after cleaning of data.
+# Check the dataset structure after data cleaning.
+print("\nDataset information after cleaning:")
+df.info()
+
+# Verify the total number of missing values.
+print("\nTotal missing values after cleaning:",
+      df.isnull().sum().sum())
+
+# Verify the dataset dimensions remain unchanged.
+print("\nDataset shape after cleaning:", df.shape)
