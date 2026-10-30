@@ -62,3 +62,17 @@ print("\nTotal missing values after cleaning:",
 
 # Verify the dataset dimensions remain unchanged.
 print("\nDataset shape after cleaning:", df.shape)
+
+# -----------------------------------------
+# Exploratory Data Analysis (EDA)
+# -----------------------------------------
+
+# Analyze the distribution of customer churn.
+print("\nCustomer Churn Distribution:")
+print(df["Churn"].value_counts())
+
+# Calculate the percentage of customers in each churn category.
+churn_percentage = df["Churn"].value_counts(normalize=True) * 100
+
+print("\nCustomer Churn Percentage:")
+print(churn_percentage.round(2))
