@@ -142,3 +142,37 @@ contract_churn_percentage = pd.crosstab(
 
 print("\nChurn Percentage by Contract Type:")
 print(contract_churn_percentage.round(2))
+
+# -----------------------------------------
+# Churn Percentage by Contract Type Visualization
+# -----------------------------------------
+
+# Create the contract-wise churn bar chart.
+ax = contract_churn_percentage[["Yes"]].plot(
+    kind="bar",
+    figsize=(8, 5),
+    legend=False
+)
+
+# Add percentage labels above each bar.
+for bar in ax.patches:
+    height = bar.get_height()
+
+    ax.text(
+        bar.get_x() + bar.get_width() / 2,
+        height + 1,
+        f"{height:.2f}%",
+        ha="center",
+        va="bottom",
+        fontsize=10
+    )
+
+# Add chart title and axis labels.
+plt.title("Churn Rate by Contract Type")
+plt.xlabel("Contract Type")
+plt.ylabel("Churn Percentage")
+plt.xticks(rotation=0)
+plt.ylim(0, 50)
+plt.tight_layout()
+
+#plt.show()
