@@ -176,3 +176,42 @@ plt.ylim(0, 50)
 plt.tight_layout()
 
 #plt.show()
+
+# -----------------------------------------
+# Customer Churn Analysis by Tenure
+# -----------------------------------------
+
+# Check the minimum and maximum customer tenure.
+print("\nCustomer Tenure Statistics:")
+print("Minimum tenure:", df["tenure"].min(), "months")
+print("Maximum tenure:", df["tenure"].max(), "months")
+
+# Group customers based on their tenure.
+df["TenureGroup"] = pd.cut(
+    df["tenure"],
+    bins=[-1, 12, 24, 48, 72],
+    labels=["0-1 Year", "1-2 Years", "2-4 Years", "4-6 Years"]
+)
+
+# Display the number of customers in each tenure group.
+print("\nCustomer Count by Tenure Group:")
+print(df["TenureGroup"].value_counts().sort_index())
+
+# Analyze customer churn across tenure groups.
+tenure_churn = pd.crosstab(
+    df["TenureGroup"],
+    df["Churn"]
+)
+
+print("\nCustomer Churn by Tenure Group:")
+print(tenure_churn)
+
+# Calculate churn percentage within each tenure group.
+tenure_churn_percentage = pd.crosstab(
+    df["TenureGroup"],
+    df["Churn"],
+    normalize="index"
+) * 100
+
+print("\nChurn Percentage by Tenure Group:")
+print(tenure_churn_percentage.round(2))
