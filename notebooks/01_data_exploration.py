@@ -215,3 +215,41 @@ tenure_churn_percentage = pd.crosstab(
 
 print("\nChurn Percentage by Tenure Group:")
 print(tenure_churn_percentage.round(2))
+
+# ----------------------------------------
+# Visualization: Churn Percentage by Tenure
+# ----------------------------------------
+
+ax = tenure_churn_percentage[["Yes"]].plot(
+    kind="bar",
+    figsize=(9, 5),
+    legend=False,
+    color="coral",
+    edgecolor="black",
+    width=0.6
+)
+
+# Add percentage labels above each bar
+for bar in ax.patches:
+    height = bar.get_height()
+    ax.text(
+        bar.get_x() + bar.get_width() / 2,
+        height + 1,
+        f"{height:.2f}%",
+        ha="center",
+        va="bottom",
+        fontsize=10,
+        fontweight="bold"
+    )
+
+# Customize chart appearance
+plt.title("Customer Churn Rate by Tenure Group", fontsize=14, fontweight="bold")
+plt.xlabel("Tenure Group", fontsize=11)
+plt.ylabel("Churn Percentage (%)", fontsize=11)
+plt.ylim(0, 55)
+plt.xticks(rotation=0)
+plt.grid(axis="y", linestyle="--", alpha=0.4)
+plt.tight_layout()
+
+
+#plt.show()
