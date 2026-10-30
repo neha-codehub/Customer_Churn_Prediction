@@ -118,4 +118,17 @@ ax.set_xlabel("Customer Churn")
 ax.set_ylabel("Number of Customers")
 
 plt.tight_layout()
-plt.show()
+#plt.show()
+
+# -----------------------------------------
+# Customer Churn Analysis by Contract Type
+# -----------------------------------------
+
+# Count customers by contract type and churn status.
+contract_churn = pd.crosstab(
+    df["Contract"],
+    df["Churn"]
+)
+
+print("\nCustomer Churn by Contract Type:")
+print(contract_churn)
