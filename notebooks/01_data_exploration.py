@@ -132,3 +132,13 @@ contract_churn = pd.crosstab(
 
 print("\nCustomer Churn by Contract Type:")
 print(contract_churn)
+
+# Calculate churn percentage within each contract type.
+contract_churn_percentage = pd.crosstab(
+    df["Contract"],
+    df["Churn"],
+    normalize="index"
+) * 100
+
+print("\nChurn Percentage by Contract Type:")
+print(contract_churn_percentage.round(2))
