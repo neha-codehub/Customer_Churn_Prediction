@@ -1,5 +1,6 @@
 
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # Load the original customer churn dataset.
 df = pd.read_csv("data/raw/Telco-Customer-Churn.csv")
@@ -76,3 +77,15 @@ churn_percentage = df["Churn"].value_counts(normalize=True) * 100
 
 print("\nCustomer Churn Percentage:")
 print(churn_percentage.round(2))
+
+# Visualize the customer churn distribution.
+churn_counts = df["Churn"].value_counts()
+
+churn_counts.plot(kind="bar", figsize=(7, 5))
+
+plt.title("Customer Churn Distribution")
+plt.xlabel("Customer Churn")
+plt.ylabel("Number of Customers")
+plt.xticks(rotation=0)
+plt.tight_layout()
+plt.show()
