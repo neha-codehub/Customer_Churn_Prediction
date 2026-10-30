@@ -30,3 +30,13 @@ print("\nTotalCharges data type:", df["TotalCharges"].dtype)
 # Count missing values created during conversion.
 print("Missing TotalCharges after conversion:",
       df["TotalCharges"].isnull().sum())
+
+# Replace missing TotalCharges with 0 for customers
+# who have zero months of service.
+df.loc[df["tenure"] == 0, "TotalCharges"] = (
+    df.loc[df["tenure"] == 0, "TotalCharges"].fillna(0)
+)
+
+# Verify that missing values have been handled.
+print("\nMissing TotalCharges after cleaning:",
+      df["TotalCharges"].isnull().sum())
