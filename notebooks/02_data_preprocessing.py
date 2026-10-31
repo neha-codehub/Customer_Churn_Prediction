@@ -1,0 +1,27 @@
+# ----------------------------------------
+# Customer Churn Prediction
+# Data Preprocessing
+# ----------------------------------------
+
+# Import required libraries
+import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
+
+# Load the dataset
+df = pd.read_csv("data/raw/Telco-Customer-Churn.csv")
+
+# Clean TotalCharges
+df["TotalCharges"] = pd.to_numeric(
+    df["TotalCharges"].str.strip(),
+    errors="coerce"
+)
+
+# Handle missing TotalCharges for zero-tenure customers
+df.loc[df["tenure"] == 0, "TotalCharges"] = (
+    df.loc[df["tenure"] == 0, "TotalCharges"].fillna(0)
+)
+
+# Verify the dataset
+print("Dataset Shape:", df.shape)
+print("\nMissing Values:")
+print(df.isnull().sum().sum())
