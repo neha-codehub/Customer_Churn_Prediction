@@ -1098,4 +1098,39 @@ for bar in bars:
 
 plt.grid(axis="y", linestyle="--", alpha=0.5)
 plt.tight_layout()
-plt.show()
+#plt.show()
+
+# --------------------------------------------
+# Analysis: Customer Churn by Monthly Charges
+# -------------------------------------------==
+
+# Calculate average monthly charges based on churn status
+monthly_charges_analysis = df.groupby("Churn")["MonthlyCharges"].agg(
+    ["mean", "median", "min", "max"]
+)
+
+print("\nMonthly Charges Analysis by Churn:")
+print(monthly_charges_analysis.round(2))
+
+# ----------------------------------------
+# Visualization: Monthly Charges by Churn
+# ----------------------------------------
+
+plt.figure(figsize=(8, 5))
+
+plt.boxplot(
+    [
+        df[df["Churn"] == "No"]["MonthlyCharges"],
+        df[df["Churn"] == "Yes"]["MonthlyCharges"]
+    ],
+    tick_labels=["Stayed", "Churned"],
+    patch_artist=True
+)
+
+plt.title("Monthly Charges Distribution by Customer Churn")
+plt.xlabel("Customer Churn")
+plt.ylabel("Monthly Charges")
+
+plt.grid(axis="y", linestyle="--", alpha=0.5)
+plt.tight_layout()
+#plt.show()
