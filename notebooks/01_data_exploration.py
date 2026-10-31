@@ -983,3 +983,61 @@ for bar in bars:
 plt.grid(axis="y", linestyle="--", alpha=0.5)
 plt.tight_layout()
 #plt.show()
+
+
+# ----------------------------------------
+# Analysis: Customer Churn by Multiple Lines
+# ----------------------------------------
+
+# Calculate customer counts by multiple lines and churn
+multiple_lines_churn = pd.crosstab(
+    df["MultipleLines"],
+    df["Churn"]
+)
+
+print("\nCustomer Churn by Multiple Lines:")
+print(multiple_lines_churn)
+
+# Calculate churn percentages
+multiple_lines_churn_percentage = pd.crosstab(
+    df["MultipleLines"],
+    df["Churn"],
+    normalize="index"
+) * 100
+
+print("\nChurn Percentage by Multiple Lines:")
+print(multiple_lines_churn_percentage.round(2))
+
+# ----------------------------------------
+# Visualization: Churn by Multiple Lines
+# ----------------------------------------
+
+multiple_lines_churn_rate = multiple_lines_churn_percentage["Yes"]
+
+plt.figure(figsize=(9, 5))
+
+bars = plt.bar(
+    multiple_lines_churn_rate.index,
+    multiple_lines_churn_rate.values,
+    color="coral",
+    edgecolor="black"
+)
+
+plt.title("Customer Churn Rate by Multiple Lines")
+plt.xlabel("Multiple Lines")
+plt.ylabel("Churn Rate (%)")
+plt.ylim(0, 40)
+
+# Display percentage labels above each bar
+for bar in bars:
+    height = bar.get_height()
+    plt.text(
+        bar.get_x() + bar.get_width() / 2,
+        height + 1,
+        f"{height:.2f}%",
+        ha="center"
+    )
+
+plt.grid(axis="y", linestyle="--", alpha=0.5)
+plt.tight_layout()
+#plt.show()
