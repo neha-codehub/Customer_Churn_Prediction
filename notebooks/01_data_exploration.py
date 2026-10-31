@@ -889,4 +889,5 @@ streaming_tv_churn_percentage = pd.crosstab(
 ) * 100
 
 print("\nChurn Percentage by Streaming TV:")
+
 print(streaming_tv_churn_percentage.round(2))
