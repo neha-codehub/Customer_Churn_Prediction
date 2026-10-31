@@ -447,3 +447,27 @@ plt.xticks(rotation=0)
 plt.grid(axis="y", linestyle="--", alpha=0.4)
 plt.tight_layout()
 #plt.show()
+
+
+# ----------------------------------------
+# Analysis: Customer Churn by Partner Status
+# ----------------------------------------
+
+# Calculate customer counts by partner status and churn
+partner_churn = pd.crosstab(
+    df["Partner"],
+    df["Churn"]
+)
+
+print("\nCustomer Churn by Partner Status:")
+print(partner_churn)
+
+# Calculate churn percentages
+partner_churn_percentage = pd.crosstab(
+    df["Partner"],
+    df["Churn"],
+    normalize="index"
+) * 100
+
+print("\nChurn Percentage by Partner Status:")
+print(partner_churn_percentage.round(2))
