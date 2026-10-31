@@ -43,3 +43,19 @@ y = ml_df["Churn"]
 # Display dataset shapes
 print("\nFeature Dataset Shape:", X.shape)
 print("Target Dataset Shape:", y.shape)
+
+# ----------------------------------------
+# Step 3: Identify Categorical Features
+# ----------------------------------------
+
+# Select columns containing text data
+categorical_columns = X.select_dtypes(
+    include=["str", "object"]
+).columns
+
+# Display categorical column names
+print("\nCategorical Columns:")
+print(categorical_columns.tolist())
+
+# Display the total number of categorical columns
+print("\nNumber of Categorical Columns:", len(categorical_columns))
