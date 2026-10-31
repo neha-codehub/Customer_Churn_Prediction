@@ -1134,3 +1134,39 @@ plt.ylabel("Monthly Charges")
 plt.grid(axis="y", linestyle="--", alpha=0.5)
 plt.tight_layout()
 #plt.show()
+
+
+# ----------------------------------------
+# Analysis: Customer Churn by Total Charges
+# ----------------------------------------
+
+# Calculate total charges based on churn status
+total_charges_analysis = df.groupby("Churn")["TotalCharges"].agg(
+    ["mean", "median", "min", "max"]
+)
+
+print("\nTotal Charges Analysis by Churn:")
+print(total_charges_analysis.round(2))
+
+# ----------------------------------------
+# Visualization: Total Charges by Churn
+# ----------------------------------------
+
+plt.figure(figsize=(8, 5))
+
+plt.boxplot(
+    [
+        df[df["Churn"] == "No"]["TotalCharges"],
+        df[df["Churn"] == "Yes"]["TotalCharges"]
+    ],
+    tick_labels=["Stayed", "Churned"],
+    patch_artist=True
+)
+
+plt.title("Total Charges Distribution by Customer Churn")
+plt.xlabel("Customer Churn")
+plt.ylabel("Total Charges")
+
+plt.grid(axis="y", linestyle="--", alpha=0.5)
+plt.tight_layout()
+#plt.show()
