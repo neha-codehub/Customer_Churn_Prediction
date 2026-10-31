@@ -509,3 +509,27 @@ plt.xticks(rotation=0)
 plt.grid(axis="y", linestyle="--", alpha=0.4)
 plt.tight_layout()
 #plt.show()
+
+
+# ----------------------------------------
+# Analysis: Customer Churn by Dependent Status
+# ----------------------------------------
+
+# Calculate customer counts by dependent status and churn
+dependents_churn = pd.crosstab(
+    df["Dependents"],
+    df["Churn"]
+)
+
+print("\nCustomer Churn by Dependent Status:")
+print(dependents_churn)
+
+# Calculate churn percentages
+dependents_churn_percentage = pd.crosstab(
+    df["Dependents"],
+    df["Churn"],
+    normalize="index"
+) * 100
+
+print("\nChurn Percentage by Dependent Status:")
+print(dependents_churn_percentage.round(2))
