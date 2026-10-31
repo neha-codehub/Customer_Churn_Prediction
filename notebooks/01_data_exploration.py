@@ -948,3 +948,38 @@ streaming_movies_churn_percentage = pd.crosstab(
 
 print("\nChurn Percentage by Streaming Movies:")
 print(streaming_movies_churn_percentage.round(2))
+
+
+# ----------------------------------------
+# Visualization: Churn by Streaming Movies
+# ----------------------------------------
+
+streaming_movies_churn_rate = streaming_movies_churn_percentage["Yes"]
+
+plt.figure(figsize=(9, 5))
+
+bars = plt.bar(
+    streaming_movies_churn_rate.index,
+    streaming_movies_churn_rate.values,
+    color="coral",
+    edgecolor="black"
+)
+
+plt.title("Customer Churn Rate by Streaming Movies")
+plt.xlabel("Streaming Movies")
+plt.ylabel("Churn Rate (%)")
+plt.ylim(0, 50)
+
+# Display percentage labels above each bar
+for bar in bars:
+    height = bar.get_height()
+    plt.text(
+        bar.get_x() + bar.get_width() / 2,
+        height + 1,
+        f"{height:.2f}%",
+        ha="center"
+    )
+
+plt.grid(axis="y", linestyle="--", alpha=0.5)
+plt.tight_layout()
+#plt.show()
