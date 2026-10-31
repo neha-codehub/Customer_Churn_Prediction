@@ -657,3 +657,37 @@ security_churn_percentage = pd.crosstab(
 
 print("\nChurn Percentage by Online Security:")
 print(security_churn_percentage.round(2))
+
+# ----------------------------------------
+# Visualization: Churn by Online Security
+# ----------------------------------------
+
+security_churn_rate = security_churn_percentage["Yes"]
+
+plt.figure(figsize=(9, 5))
+
+bars = plt.bar(
+    security_churn_rate.index,
+    security_churn_rate.values,
+    color="coral",
+    edgecolor="black"
+)
+
+plt.title("Customer Churn Rate by Online Security")
+plt.xlabel("Online Security")
+plt.ylabel("Churn Rate (%)")
+plt.ylim(0, 50)
+
+# Display percentage labels above each bar
+for bar in bars:
+    height = bar.get_height()
+    plt.text(
+        bar.get_x() + bar.get_width() / 2,
+        height + 1,
+        f"{height:.2f}%",
+        ha="center"
+    )
+
+plt.grid(axis="y", linestyle="--", alpha=0.5)
+plt.tight_layout()
+#plt.show()
