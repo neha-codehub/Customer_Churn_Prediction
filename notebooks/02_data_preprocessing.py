@@ -25,3 +25,21 @@ df.loc[df["tenure"] == 0, "TotalCharges"] = (
 print("Dataset Shape:", df.shape)
 print("\nMissing Values:")
 print(df.isnull().sum().sum())
+
+
+# ----------------------------------------
+# Feature and Target Separation
+# ----------------------------------------
+
+# Remove customerID because it is only an identifier
+# Remove TenureGroup because it was created only for exploration
+ml_df = df.drop(columns=["customerID"])
+
+
+# Remove Churn because it is the target variable
+X = ml_df.drop(columns=["Churn"])
+y = ml_df["Churn"]
+
+# Display dataset shapes
+print("\nFeature Dataset Shape:", X.shape)
+print("Target Dataset Shape:", y.shape)
