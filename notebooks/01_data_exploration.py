@@ -750,3 +750,27 @@ for bar in bars:
 plt.grid(axis="y", linestyle="--", alpha=0.5)
 plt.tight_layout()
 #plt.show()
+
+
+# ----------------------------------------
+# Analysis: Customer Churn by Device Protection
+# ----------------------------------------
+
+# Calculate customer counts by device protection and churn
+device_churn = pd.crosstab(
+    df["DeviceProtection"],
+    df["Churn"]
+)
+
+print("\nCustomer Churn by Device Protection:")
+print(device_churn)
+
+# Calculate churn percentages
+device_churn_percentage = pd.crosstab(
+    df["DeviceProtection"],
+    df["Churn"],
+    normalize="index"
+) * 100
+
+print("\nChurn Percentage by Device Protection:")
+print(device_churn_percentage.round(2))
