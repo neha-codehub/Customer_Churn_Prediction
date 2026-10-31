@@ -315,3 +315,36 @@ plt.tight_layout()
 
 #plt.show()
 
+#------------------------------------------------
+#Analyze churn by customer demographics like:
+#-------------------------------------------------
+#   >Senior citizen status
+#   >Gender
+#   >Whether customers have partners
+#   >Whether customers have dependents
+#--------------------------------------------------
+
+
+# ----------------------------------------
+# Analysis: Customer Churn by Senior Citizen Status
+# ----------------------------------------
+
+# Calculate customer counts by senior citizen status and churn
+senior_churn = pd.crosstab(
+    df["SeniorCitizen"],
+    df["Churn"]
+)
+
+print("\nCustomer Churn by Senior Citizen Status:")
+print(senior_churn)
+
+# Calculate churn percentages for each group
+senior_churn_percentage = pd.crosstab(
+    df["SeniorCitizen"],
+    df["Churn"],
+    normalize="index"
+) * 100
+
+print("\nChurn Percentage by Senior Citizen Status:")
+print(senior_churn_percentage.round(2))
+
