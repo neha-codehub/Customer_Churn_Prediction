@@ -1041,3 +1041,61 @@ for bar in bars:
 plt.grid(axis="y", linestyle="--", alpha=0.5)
 plt.tight_layout()
 #plt.show()
+
+# ----------------------------------------
+# Analysis: Customer Churn by Paperless Billing
+# ----------------------------------------
+
+# Calculate customer counts by paperless billing and churn
+paperless_churn = pd.crosstab(
+    df["PaperlessBilling"],
+    df["Churn"]
+)
+
+print("\nCustomer Churn by Paperless Billing:")
+print(paperless_churn)
+
+# Calculate churn percentages
+paperless_churn_percentage = pd.crosstab(
+    df["PaperlessBilling"],
+    df["Churn"],
+    normalize="index"
+) * 100
+
+print("\nChurn Percentage by Paperless Billing:")
+print(paperless_churn_percentage.round(2))
+
+
+# ----------------------------------------
+# Visualization: Churn by Paperless Billing
+# ----------------------------------------
+
+paperless_churn_rate = paperless_churn_percentage["Yes"]
+
+plt.figure(figsize=(8, 5))
+
+bars = plt.bar(
+    paperless_churn_rate.index,
+    paperless_churn_rate.values,
+    color="coral",
+    edgecolor="black"
+)
+
+plt.title("Customer Churn Rate by Paperless Billing")
+plt.xlabel("Paperless Billing")
+plt.ylabel("Churn Rate (%)")
+plt.ylim(0, 40)
+
+# Display percentage labels above each bar
+for bar in bars:
+    height = bar.get_height()
+    plt.text(
+        bar.get_x() + bar.get_width() / 2,
+        height + 1,
+        f"{height:.2f}%",
+        ha="center"
+    )
+
+plt.grid(axis="y", linestyle="--", alpha=0.5)
+plt.tight_layout()
+#plt.show()
