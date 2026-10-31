@@ -34,3 +34,16 @@ logistic_model = LogisticRegression(
 logistic_model.fit(X_train, y_train)
 
 print("\nLogistic Regression Model Trained Successfully!")
+
+
+#Make Predictions
+
+y_pred = logistic_model.predict(X_test)
+
+print("\nPredictions Generated Successfully!")
+
+print("\nFirst 10 Actual Values:")
+print(y_test.head(10).tolist())
+
+print("\nFirst 10 Predicted Values:")
+print(y_pred[:10])
