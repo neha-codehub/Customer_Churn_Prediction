@@ -774,3 +774,38 @@ device_churn_percentage = pd.crosstab(
 
 print("\nChurn Percentage by Device Protection:")
 print(device_churn_percentage.round(2))
+
+
+# ----------------------------------------
+# Visualization: Churn by Device Protection
+# ----------------------------------------
+
+device_churn_rate = device_churn_percentage["Yes"]
+
+plt.figure(figsize=(9, 5))
+
+bars = plt.bar(
+    device_churn_rate.index,
+    device_churn_rate.values,
+    color="coral",
+    edgecolor="black"
+)
+
+plt.title("Customer Churn Rate by Device Protection")
+plt.xlabel("Device Protection")
+plt.ylabel("Churn Rate (%)")
+plt.ylim(0, 50)
+
+# Display percentage labels above each bar
+for bar in bars:
+    height = bar.get_height()
+    plt.text(
+        bar.get_x() + bar.get_width() / 2,
+        height + 1,
+        f"{height:.2f}%",
+        ha="center"
+    )
+
+plt.grid(axis="y", linestyle="--", alpha=0.5)
+plt.tight_layout()
+plt.show()
