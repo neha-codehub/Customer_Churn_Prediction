@@ -1098,4 +1098,4 @@ for bar in bars:
 
 plt.grid(axis="y", linestyle="--", alpha=0.5)
 plt.tight_layout()
-#plt.show()
+plt.show()
