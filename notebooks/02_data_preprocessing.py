@@ -45,7 +45,7 @@ print("\nFeature Dataset Shape:", X.shape)
 print("Target Dataset Shape:", y.shape)
 
 # ----------------------------------------
-# Step 3: Identify Categorical Features
+#  Identify Categorical Features
 # ----------------------------------------
 
 # Select columns containing text data
@@ -59,3 +59,43 @@ print(categorical_columns.tolist())
 
 # Display the total number of categorical columns
 print("\nNumber of Categorical Columns:", len(categorical_columns))
+
+
+
+# --------------------------------------------------------------------------=--------------------------------------
+#One-Hot Encoding-for learning and checking the output
+#Before model evaluation we'll adjust the workflow to fit the encoder only on training data to avoid data leakage.
+# ----------------------------------------=-------------------------------------------------------------------------
+
+from sklearn.preprocessing import OneHotEncoder
+
+# Create the One-Hot Encoder
+encoder = OneHotEncoder(
+    handle_unknown="ignore",
+    sparse_output=False
+)
+
+# Convert categorical values into numerical columns
+encoded_array = encoder.fit_transform(X[categorical_columns])
+
+# Convert the encoded array into a DataFrame
+encoded_df = pd.DataFrame(
+    encoded_array,
+    columns=encoder.get_feature_names_out(categorical_columns),
+    index=X.index
+)
+
+# Combine numerical and encoded categorical features
+X_encoded = pd.concat(
+    [
+        X.drop(columns=categorical_columns),
+        encoded_df
+    ],
+    axis=1
+)
+
+# Display the encoded dataset information
+print("\nEncoded Feature Dataset Shape:", X_encoded.shape)
+
+print("\nFirst Five Rows of Encoded Dataset:")
+print(X_encoded.head())
