@@ -691,3 +691,62 @@ for bar in bars:
 plt.grid(axis="y", linestyle="--", alpha=0.5)
 plt.tight_layout()
 #plt.show()
+
+
+# ----------------------------------------
+# Analysis: Customer Churn by Online Backup
+# ----------------------------------------
+
+# Calculate customer counts by online backup and churn
+backup_churn = pd.crosstab(
+    df["OnlineBackup"],
+    df["Churn"]
+)
+
+print("\nCustomer Churn by Online Backup:")
+print(backup_churn)
+
+# Calculate churn percentages
+backup_churn_percentage = pd.crosstab(
+    df["OnlineBackup"],
+    df["Churn"],
+    normalize="index"
+) * 100
+
+print("\nChurn Percentage by Online Backup:")
+print(backup_churn_percentage.round(2))
+
+
+# ----------------------------------------
+# Visualization: Churn by Online Backup
+# ----------------------------------------
+
+backup_churn_rate = backup_churn_percentage["Yes"]
+
+plt.figure(figsize=(9, 5))
+
+bars = plt.bar(
+    backup_churn_rate.index,
+    backup_churn_rate.values,
+    color="coral",
+    edgecolor="black"
+)
+
+plt.title("Customer Churn Rate by Online Backup")
+plt.xlabel("Online Backup")
+plt.ylabel("Churn Rate (%)")
+plt.ylim(0, 50)
+
+# Display percentage labels above each bar
+for bar in bars:
+    height = bar.get_height()
+    plt.text(
+        bar.get_x() + bar.get_width() / 2,
+        height + 1,
+        f"{height:.2f}%",
+        ha="center"
+    )
+
+plt.grid(axis="y", linestyle="--", alpha=0.5)
+plt.tight_layout()
+#plt.show()
