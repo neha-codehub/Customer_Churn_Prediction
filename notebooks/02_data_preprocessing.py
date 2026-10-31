@@ -7,6 +7,7 @@
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 
 # Load the dataset
 df = pd.read_csv("data/raw/Telco-Customer-Churn.csv")
@@ -216,6 +217,47 @@ print(X_train_final.isnull().sum().sum())
 
 print("\nMissing Values in Testing Dataset:")
 print(X_test_final.isnull().sum().sum())
+
+#-------------------------------
+#Identify Numerical Features
+#---------------------------------------
+numerical_columns = X_train.select_dtypes(
+    include=["int64", "float64"]
+).columns
+
+print("\nNumerical Columns:")
+print(numerical_columns.tolist())
+
+#----------------------
+#Apply Feature Scaling
+#-----------------------
+# Select continuous numerical features
+scaling_columns = [
+    "tenure",
+    "MonthlyCharges",
+    "TotalCharges"
+]
+
+# Create the StandardScaler
+scaler = StandardScaler()
+
+# Fit scaler on training data and transform it
+X_train_final[scaling_columns] = scaler.fit_transform(
+    X_train_final[scaling_columns]
+)
+
+# Transform testing data using the same fitted scaler
+X_test_final[scaling_columns] = scaler.transform(
+    X_test_final[scaling_columns]
+)
+
+print("\nFeature Scaling Completed Successfully!")
+
+print("\nScaled Training Features:")
+print(X_train_final[scaling_columns].describe())
+
+print("\nScaled Testing Features:")
+print(X_test_final[scaling_columns].describe())
 
 
 
