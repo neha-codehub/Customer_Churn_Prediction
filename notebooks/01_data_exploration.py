@@ -808,4 +808,27 @@ for bar in bars:
 
 plt.grid(axis="y", linestyle="--", alpha=0.5)
 plt.tight_layout()
-plt.show()
+#plt.show()
+
+# ----------------------------------------
+# Analysis: Customer Churn by Tech Support
+# ----------------------------------------
+
+# Calculate customer counts by tech support and churn
+tech_support_churn = pd.crosstab(
+    df["TechSupport"],
+    df["Churn"]
+)
+
+print("\nCustomer Churn by Tech Support:")
+print(tech_support_churn)
+
+# Calculate churn percentages
+tech_support_churn_percentage = pd.crosstab(
+    df["TechSupport"],
+    df["Churn"],
+    normalize="index"
+) * 100
+
+print("\nChurn Percentage by Tech Support:")
+print(tech_support_churn_percentage.round(2))
