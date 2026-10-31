@@ -251,5 +251,67 @@ plt.xticks(rotation=0)
 plt.grid(axis="y", linestyle="--", alpha=0.4)
 plt.tight_layout()
 
+#plt.show()
+
+# ----------------------------------------
+# Analysis: Customer Churn by Payment Method
+# ----------------------------------------
+
+# Calculate customer counts by payment method and churn status
+payment_churn = pd.crosstab(
+    df["PaymentMethod"],
+    df["Churn"]
+)
+
+print("\nCustomer Churn by Payment Method:")
+print(payment_churn)
+
+# Calculate churn percentage for each payment method
+payment_churn_percentage = pd.crosstab(
+    df["PaymentMethod"],
+    df["Churn"],
+    normalize="index"
+) * 100
+
+print("\nChurn Percentage by Payment Method:")
+print(payment_churn_percentage.round(2))
+
+# ----------------------------------------
+# Visualization: Churn Percentage by Payment Method
+# ----------------------------------------
+
+ax = payment_churn_percentage[["Yes"]].plot(
+    kind="bar",
+    figsize=(10, 5),
+    legend=False,
+    color="coral",
+    edgecolor="black",
+    width=0.6
+)
+
+# Add percentage labels above each bar
+for bar in ax.patches:
+    height = bar.get_height()
+    ax.text(
+        bar.get_x() + bar.get_width() / 2,
+        height + 1,
+        f"{height:.2f}%",
+        ha="center",
+        va="bottom",
+        fontsize=10,
+        fontweight="bold"
+    )
+
+# Customize chart appearance
+plt.title("Customer Churn Rate by Payment Method",
+          fontsize=14, fontweight="bold")
+plt.xlabel("Payment Method", fontsize=11)
+plt.ylabel("Churn Percentage (%)", fontsize=11)
+plt.ylim(0, 55)
+plt.xticks(rotation=20, ha="right")
+plt.grid(axis="y", linestyle="--", alpha=0.4)
+plt.tight_layout()
+
 
 #plt.show()
+
