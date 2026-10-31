@@ -571,3 +571,27 @@ plt.xticks(rotation=0)
 plt.grid(axis="y", linestyle="--", alpha=0.4)
 plt.tight_layout()
 #plt.show()
+
+
+# ----------------------------------------
+# Analysis: Customer Churn by Internet Service
+# ----------------------------------------
+
+# Calculate customer counts by internet service and churn
+internet_churn = pd.crosstab(
+    df["InternetService"],
+    df["Churn"]
+)
+
+print("\nCustomer Churn by Internet Service:")
+print(internet_churn)
+
+# Calculate churn percentages
+internet_churn_percentage = pd.crosstab(
+    df["InternetService"],
+    df["Churn"],
+    normalize="index"
+) * 100
+
+print("\nChurn Percentage by Internet Service:")
+print(internet_churn_percentage.round(2))
