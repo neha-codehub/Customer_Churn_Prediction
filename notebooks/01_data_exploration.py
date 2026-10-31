@@ -1173,7 +1173,7 @@ plt.tight_layout()
 
 
 # --------------------------------------------------------------
-# Analysis: Correlation Between Numerical Features with churn
+# Analysis: Correlation Between Numerical features
 # ---------------------------------------------------------------
 
 # Select numerical columns
