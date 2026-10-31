@@ -633,3 +633,27 @@ plt.xticks(rotation=0)
 plt.grid(axis="y", linestyle="--", alpha=0.4)
 plt.tight_layout()
 #plt.show()
+
+
+# ----------------------------------------
+# Analysis: Customer Churn by Online Security
+# ----------------------------------------
+
+# Calculate customer counts by online security and churn
+security_churn = pd.crosstab(
+    df["OnlineSecurity"],
+    df["Churn"]
+)
+
+print("\nCustomer Churn by Online Security:")
+print(security_churn)
+
+# Calculate churn percentages
+security_churn_percentage = pd.crosstab(
+    df["OnlineSecurity"],
+    df["Churn"],
+    normalize="index"
+) * 100
+
+print("\nChurn Percentage by Online Security:")
+print(security_churn_percentage.round(2))
