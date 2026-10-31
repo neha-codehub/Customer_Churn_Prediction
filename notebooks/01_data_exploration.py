@@ -386,3 +386,26 @@ plt.grid(axis="y", linestyle="--", alpha=0.4)
 plt.tight_layout()
 #plt.show()
 
+
+# ----------------------------------------
+# Analysis: Customer Churn by Gender
+# ----------------------------------------
+
+# Calculate customer counts by gender and churn status
+gender_churn = pd.crosstab(
+    df["gender"],
+    df["Churn"]
+)
+
+print("\nCustomer Churn by Gender:")
+print(gender_churn)
+
+# Calculate churn percentage for each gender
+gender_churn_percentage = pd.crosstab(
+    df["gender"],
+    df["Churn"],
+    normalize="index"
+) * 100
+
+print("\nChurn Percentage by Gender:")
+print(gender_churn_percentage.round(2))
