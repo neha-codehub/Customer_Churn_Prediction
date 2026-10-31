@@ -1184,3 +1184,28 @@ correlation_matrix = numerical_df.corr()
 
 print("\nCorrelation Matrix:")
 print(correlation_matrix.round(2))
+
+
+# ----------------------------------------
+# Analysis: Correlation of Numerical Features with Churn
+# ----------------------------------------
+
+# Create a copy so the original dataset remains unchanged
+correlation_df = df.copy()
+
+# Convert churn labels into numerical values
+# No = 0 and Yes = 1
+correlation_df["ChurnEncoded"] = correlation_df["Churn"].map({
+    "No": 0,
+    "Yes": 1
+})
+
+# Select numerical columns, including the encoded churn column
+numerical_df = correlation_df.select_dtypes(include=["int64", "float64"])
+
+# Calculate correlation with churn
+churn_correlation = numerical_df.corr()["ChurnEncoded"].drop("ChurnEncoded")
+
+# Display correlations in descending order
+print("\nCorrelation of Numerical Features with Churn:")
+print(churn_correlation.sort_values(ascending=False).round(2))
