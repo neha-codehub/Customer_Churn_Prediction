@@ -1209,3 +1209,14 @@ churn_correlation = numerical_df.corr()["ChurnEncoded"].drop("ChurnEncoded")
 # Display correlations in descending order
 print("\nCorrelation of Numerical Features with Churn:")
 print(churn_correlation.sort_values(ascending=False).round(2))
+
+
+# ----------------------------------------
+# Machine Learning: Initial Data Inspection
+# ----------------------------------------
+
+print("\nDataset Columns:")
+print(df.columns.tolist())
+
+print("\nDataset Data Types:")
+print(df.dtypes)
