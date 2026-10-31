@@ -99,3 +99,20 @@ print("\nEncoded Feature Dataset Shape:", X_encoded.shape)
 
 print("\nFirst Five Rows of Encoded Dataset:")
 print(X_encoded.head())
+
+
+# ----------------------------------------
+# Encode Target Variables
+# ----------------------------------------
+
+# Convert churn labels into numerical values
+y_encoded = y.map({
+    "No": 0,
+    "Yes": 1
+})
+
+# Display target variable information
+print("\nEncoded Target Values:")
+print(y_encoded.value_counts())
+
+print("\nTarget Data Type:", y_encoded.dtype)
