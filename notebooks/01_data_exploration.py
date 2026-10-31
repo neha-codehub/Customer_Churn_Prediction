@@ -924,3 +924,27 @@ for bar in bars:
 plt.grid(axis="y", linestyle="--", alpha=0.5)
 plt.tight_layout()
 #plt.show()
+
+
+# ----------------------------------------------
+# Analysis: Customer Churn by Streaming Movies
+# ----------------------------------------__------
+
+# Calculate customer counts by streaming movies and churn
+streaming_movies_churn = pd.crosstab(
+    df["StreamingMovies"],
+    df["Churn"]
+)
+
+print("\nCustomer Churn by Streaming Movies:")
+print(streaming_movies_churn)
+
+# Calculate churn percentages
+streaming_movies_churn_percentage = pd.crosstab(
+    df["StreamingMovies"],
+    df["Churn"],
+    normalize="index"
+) * 100
+
+print("\nChurn Percentage by Streaming Movies:")
+print(streaming_movies_churn_percentage.round(2))
