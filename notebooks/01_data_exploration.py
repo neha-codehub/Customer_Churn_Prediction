@@ -1170,3 +1170,17 @@ plt.ylabel("Total Charges")
 plt.grid(axis="y", linestyle="--", alpha=0.5)
 plt.tight_layout()
 #plt.show()
+
+
+# --------------------------------------------------------------
+# Analysis: Correlation Between Numerical Features with churn
+# ---------------------------------------------------------------
+
+# Select numerical columns
+numerical_df = df.select_dtypes(include=["int64", "float64"])
+
+# Display correlation matrix
+correlation_matrix = numerical_df.corr()
+
+print("\nCorrelation Matrix:")
+print(correlation_matrix.round(2))
