@@ -68,41 +68,41 @@ print("\nNumber of Categorical Columns:", len(categorical_columns))
 #Before model evaluation we'll adjust the workflow to fit the encoder only on training data to avoid data leakage.
 # ----------------------------------------=-------------------------------------------------------------------------
 
-from sklearn.preprocessing import OneHotEncoder
+#from sklearn.preprocessing import OneHotEncoder
 
 # Create the One-Hot Encoder
-encoder = OneHotEncoder(
-    handle_unknown="ignore",
-    sparse_output=False
-)
+#encoder = OneHotEncoder(
+ #   handle_unknown="ignore",
+  #  sparse_output=False
+#)
 
 # Convert categorical values into numerical columns
-encoded_array = encoder.fit_transform(X[categorical_columns])
+#encoded_array = encoder.fit_transform(X[categorical_columns])
 
 # Convert the encoded array into a DataFrame
-encoded_df = pd.DataFrame(
-    encoded_array,
-    columns=encoder.get_feature_names_out(categorical_columns),
-    index=X.index
-)
+#encoded_df = pd.DataFrame(
+ #   encoded_array,
+  #  columns=encoder.get_feature_names_out(categorical_columns),
+   # index=X.index
+#)
 
 # Combine numerical and encoded categorical features
-X_encoded = pd.concat(
-    [
-        X.drop(columns=categorical_columns),
-        encoded_df
-    ],
-    axis=1
-)
+#X_encoded = pd.concat(
+ #   [
+  #      X.drop(columns=categorical_columns),
+#        encoded_df
+ #   ],
+  #  axis=1
+#)
 
 # Display the encoded dataset information
-print("\nEncoded Feature Dataset Shape:", X_encoded.shape)
+#print("\nEncoded Feature Dataset Shape:", X_encoded.shape)
 
-print("\nFirst Five Rows of Encoded Dataset:")
-print(X_encoded.head())
+#print("\nFirst Five Rows of Encoded Dataset:")
+#print(X_encoded.head())
 
 
-# ----------------------------------------
+#----------------------------------------
 # Encode Target Variables
 # ----------------------------------------
 
@@ -117,6 +117,8 @@ print("\nEncoded Target Values:")
 print(y_encoded.value_counts())
 
 print("\nTarget Data Type:", y_encoded.dtype)
+
+
 
 
 # ----------------------------------------0----
@@ -138,3 +140,72 @@ print("Testing Features Shape:", X_test.shape)
 
 print("\nTraining Target Shape:", y_train.shape)
 print("Testing Target Shape:", y_test.shape)
+
+
+ 
+
+# ----------------------------------------
+# One-Hot Encoding Without Data Leakage
+# ----------------------------------------
+
+# Create the One-Hot Encoder
+encoder = OneHotEncoder(
+    handle_unknown="ignore",
+    sparse_output=False
+)
+
+# Identify categorical columns in the training data
+categorical_columns = X_train.select_dtypes(
+    include=["str", "object"]
+).columns
+
+# Fit the encoder using training data only
+X_train_encoded_array = encoder.fit_transform(
+    X_train[categorical_columns]
+)
+
+# Transform testing data using the same encoder
+X_test_encoded_array = encoder.transform(
+    X_test[categorical_columns]
+)
+
+# Convert training encoded data into a DataFrame
+X_train_encoded = pd.DataFrame(
+    X_train_encoded_array,
+    columns=encoder.get_feature_names_out(categorical_columns),
+    index=X_train.index
+)
+
+# Convert testing encoded data into a DataFrame
+X_test_encoded = pd.DataFrame(
+    X_test_encoded_array,
+    columns=encoder.get_feature_names_out(categorical_columns),
+    index=X_test.index
+)
+
+# Combine numerical and encoded categorical features
+X_train_final = pd.concat(
+    [
+        X_train.drop(columns=categorical_columns),
+        X_train_encoded
+    ],
+    axis=1
+)
+
+X_test_final = pd.concat(
+    [
+        X_test.drop(columns=categorical_columns),
+        X_test_encoded
+    ],
+    axis=1
+)
+
+# Display final dataset shapes
+print("\nFinal Training Dataset Shape:", X_train_final.shape)
+print("Final Testing Dataset Shape:", X_test_final.shape)
+
+
+
+#
+
+
