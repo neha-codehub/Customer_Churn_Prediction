@@ -6,6 +6,7 @@
 # Import required libraries
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import train_test_split
 
 # Load the dataset
 df = pd.read_csv("data/raw/Telco-Customer-Churn.csv")
@@ -116,3 +117,24 @@ print("\nEncoded Target Values:")
 print(y_encoded.value_counts())
 
 print("\nTarget Data Type:", y_encoded.dtype)
+
+
+# ----------------------------------------0----
+#Spliting Data into Training and Testing Sets
+# ----------------------------------------------
+
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y_encoded,
+    test_size=0.20,
+    random_state=42,
+    stratify=y_encoded
+)
+
+# Display the shapes of the resulting datasets
+print("\nTraining Features Shape:", X_train.shape)
+print("Testing Features Shape:", X_test.shape)
+
+print("\nTraining Target Shape:", y_train.shape)
+print("Testing Target Shape:", y_test.shape)
