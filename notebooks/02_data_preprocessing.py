@@ -204,8 +204,20 @@ X_test_final = pd.concat(
 print("\nFinal Training Dataset Shape:", X_train_final.shape)
 print("Final Testing Dataset Shape:", X_test_final.shape)
 
+#---------------------------------
+# Validate Final Encoded Datasets
+#---------------------==-----------
+
+print("\nTraining Dataset Data Types:")
+print(X_train_final.dtypes.value_counts())
+
+print("\nMissing Values in Training Dataset:")
+print(X_train_final.isnull().sum().sum())
+
+print("\nMissing Values in Testing Dataset:")
+print(X_test_final.isnull().sum().sum())
 
 
-#
+
 
 
