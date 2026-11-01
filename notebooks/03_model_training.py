@@ -81,3 +81,19 @@ from sklearn.metrics import classification_report
 
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred, target_names=["No Churn", "Churn"]))
+
+
+
+#Create Decision Tree Model
+
+from sklearn.tree import DecisionTreeClassifier
+
+decision_tree_model = DecisionTreeClassifier(
+    random_state=42
+)
+
+# Step 11: Train Decision Tree Model
+
+decision_tree_model.fit(X_train, y_train)
+
+print("\nDecision Tree Model Trained Successfully!")
