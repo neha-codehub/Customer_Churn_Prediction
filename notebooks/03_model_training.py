@@ -143,3 +143,17 @@ random_forest_model = RandomForestClassifier(
 random_forest_model.fit(X_train, y_train)
 
 print("\nRandom Forest Model Trained Successfully!")
+
+
+
+#Make Predictions Using Random Forest
+
+y_pred_rf = random_forest_model.predict(X_test)
+
+print("\nRandom Forest Predictions Generated Successfully!")
+
+print("\nFirst 10 Actual Values:")
+print(y_test.head(10).tolist())
+
+print("\nFirst 10 Random Forest Predictions:")
+print(y_pred_rf[:10])
