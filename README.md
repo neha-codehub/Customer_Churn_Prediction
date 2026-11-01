@@ -21,6 +21,9 @@ This project explores customer data and develops machine learning models to pred
 
 The dataset contains customer demographics, subscription details, services used, payment methods, and billing information.
 
+**Dataset Source:** [IBM Telco Customer Churn Dataset](https://raw.githubusercontent.com/IBM/telco-customer-churn-on-icp4d/master/data/Telco-Customer-Churn.csv)
+
+
 ## Technologies Used
 
 - Python
@@ -91,6 +94,9 @@ It was selected because identifying more potential churn customers was prioritiz
 
 The model produces more false positives than the standard Logistic Regression model, so the final choice depends on the business cost of unnecessary customer-retention interventions.
 
+**Prediction Requirement:** The saved model expects input data with the same 45 features and preprocessing transformations used during training. Raw customer data must be cleaned, encoded, and scaled before making predictions.
+
+
 ## Project Structure
 
 ```text
@@ -100,20 +106,28 @@ Customer_Churn_Prediction/
 │   ├── raw/
 │   └── processed/
 │
+├── models/
+│   └── balanced_logistic_model.pkl
+│
 ├── notebooks/
 │   ├── 01_data_exploration.py
 │   ├── 02_data_preprocessing.py
 │   └── 03_model_training.py
 │
-├── models/
-│   └── balanced_logistic_model.pkl
-│
 ├── reports/
+│   ├── figures/
+│   │   ├── 01_churn_distribution.png
+│   │   ├── 02_churn_by_contract.png
+│   │   ├── 03_churn_by_tenure.png
+│   │   ├── 04_churn_by_payment_method.png
+│   │   └── 05_correlation_heatmap.png
+│   │
 │   └── model_comparison.csv
 │
+├── src/
 ├── .gitignore
-├── requirements.txt
-└── README.md
+├── README.md
+└── requirements.txt
 ```
 
 ## How to Run the Project
