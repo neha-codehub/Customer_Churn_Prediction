@@ -326,3 +326,16 @@ model_comparison = pd.DataFrame({
 
 print("\nModel Comparison:")
 print(model_comparison.round(3).to_string(index=False))
+
+
+
+# Save Model Comparison Report
+
+os.makedirs("reports", exist_ok=True)
+
+model_comparison.to_csv(
+    "reports/model_comparison.csv",
+    index=False
+)
+
+print("\nModel Comparison Report Saved Successfully!")
