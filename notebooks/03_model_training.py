@@ -172,3 +172,18 @@ print("Accuracy:", accuracy_rf)
 print("Precision:", precision_rf)
 print("Recall:", recall_rf)
 print("F1 Score:", f1_rf)
+
+
+#Create Balanced Logistic Regression Model
+
+balanced_logistic_model = LogisticRegression(
+    max_iter=1000,
+    random_state=42,
+    class_weight="balanced"
+)
+
+# Train Balanced Logistic Regression Model
+
+balanced_logistic_model.fit(X_train, y_train)
+
+print("\nBalanced Logistic Regression Model Trained Successfully!")
