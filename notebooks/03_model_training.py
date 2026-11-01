@@ -126,3 +126,20 @@ print("Accuracy:", accuracy_tree)
 print("Precision:", precision_tree)
 print("Recall:", recall_tree)
 print("F1 Score:", f1_tree)
+
+
+#Create Random Forest Model
+
+from sklearn.ensemble import RandomForestClassifier
+
+random_forest_model = RandomForestClassifier(
+    n_estimators=100,
+    random_state=42,
+    n_jobs=-1
+)
+
+#Train Random Forest Model
+
+random_forest_model.fit(X_train, y_train)
+
+print("\nRandom Forest Model Trained Successfully!")
