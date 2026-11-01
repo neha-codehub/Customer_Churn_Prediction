@@ -187,3 +187,33 @@ balanced_logistic_model = LogisticRegression(
 balanced_logistic_model.fit(X_train, y_train)
 
 print("\nBalanced Logistic Regression Model Trained Successfully!")
+
+
+#Make Predictions Using Balanced Logistic Regression
+
+y_pred_balanced = balanced_logistic_model.predict(X_test)
+
+print("\nBalanced Logistic Regression Predictions Generated Successfully!")
+
+
+
+#Evaluate Balanced Logistic Regression Performance
+
+accuracy_balanced = accuracy_score(y_test, y_pred_balanced)
+precision_balanced = precision_score(y_test, y_pred_balanced)
+recall_balanced = recall_score(y_test, y_pred_balanced)
+f1_balanced = f1_score(y_test, y_pred_balanced)
+
+print("\nBalanced Logistic Regression Performance:")
+print("Accuracy:", accuracy_balanced)
+print("Precision:", precision_balanced)
+print("Recall:", recall_balanced)
+print("F1 Score:", f1_balanced)
+
+
+#Confusion Matrix for Balanced Logistic Regression
+
+cm_balanced = confusion_matrix(y_test, y_pred_balanced)
+
+print("\nBalanced Logistic Regression Confusion Matrix:")
+print(cm_balanced)
