@@ -92,8 +92,21 @@ decision_tree_model = DecisionTreeClassifier(
     random_state=42
 )
 
-# Step 11: Train Decision Tree Model
+#Train Decision Tree Model
 
 decision_tree_model.fit(X_train, y_train)
 
 print("\nDecision Tree Model Trained Successfully!")
+
+
+#Make Predictions Using Decision Tree
+
+y_pred_tree = decision_tree_model.predict(X_test)
+
+print("\nDecision Tree Predictions Generated Successfully!")
+
+print("\nFirst 10 Actual Values:")
+print(y_test.head(10).tolist())
+
+print("\nFirst 10 Decision Tree Predictions:")
+print(y_pred_tree[:10])
