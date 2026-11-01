@@ -259,7 +259,22 @@ print(X_train_final[scaling_columns].describe())
 print("\nScaled Testing Features:")
 print(X_test_final[scaling_columns].describe())
 
+#-------------------------
+# Save Processed Datasets
+#---------------------------
+import os
 
+# Create the processed data directory
+os.makedirs("data/processed", exist_ok=True)
+
+# Save training and testing datasets
+X_train_final.to_csv("data/processed/X_train.csv", index=False)
+X_test_final.to_csv("data/processed/X_test.csv", index=False)
+
+y_train.to_csv("data/processed/y_train.csv", index=False)
+y_test.to_csv("data/processed/y_test.csv", index=False)
+
+print("\nProcessed datasets saved successfully!")
 
 
 
