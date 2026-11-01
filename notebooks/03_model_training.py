@@ -157,3 +157,18 @@ print(y_test.head(10).tolist())
 
 print("\nFirst 10 Random Forest Predictions:")
 print(y_pred_rf[:10])
+
+
+
+#Evaluate Random Forest Performance
+
+accuracy_rf = accuracy_score(y_test, y_pred_rf)
+precision_rf = precision_score(y_test, y_pred_rf)
+recall_rf = recall_score(y_test, y_pred_rf)
+f1_rf = f1_score(y_test, y_pred_rf)
+
+print("\nRandom Forest Model Performance:")
+print("Accuracy:", accuracy_rf)
+print("Precision:", precision_rf)
+print("Recall:", recall_rf)
+print("F1 Score:", f1_rf)
