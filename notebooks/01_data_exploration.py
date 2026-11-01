@@ -1,6 +1,8 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
+import seaborn as sns
 
 # Load the original customer churn dataset.
 df = pd.read_csv("data/raw/Telco-Customer-Churn.csv")
@@ -118,6 +120,17 @@ ax.set_xlabel("Customer Churn")
 ax.set_ylabel("Number of Customers")
 
 plt.tight_layout()
+# Create folder for saving charts
+os.makedirs("reports/figures", exist_ok=True)
+
+# Save the chart
+plt.savefig(
+    "reports/figures/01_churn_distribution.png",
+    dpi=300,
+    bbox_inches="tight"
+)
+
+print("Churn distribution chart saved successfully!")
 #plt.show()
 
 # -----------------------------------------
@@ -174,7 +187,14 @@ plt.ylabel("Churn Percentage")
 plt.xticks(rotation=0)
 plt.ylim(0, 50)
 plt.tight_layout()
+# Save contract-wise churn chart
+plt.savefig(
+    "reports/figures/02_churn_by_contract.png",
+    dpi=300,
+    bbox_inches="tight"
+)
 
+print("Contract-wise churn chart saved successfully!")
 #plt.show()
 
 # -----------------------------------------
@@ -250,7 +270,14 @@ plt.ylim(0, 55)
 plt.xticks(rotation=0)
 plt.grid(axis="y", linestyle="--", alpha=0.4)
 plt.tight_layout()
+# Save tenure-wise churn chart
+plt.savefig(
+    "reports/figures/03_churn_by_tenure.png",
+    dpi=300,
+    bbox_inches="tight"
+)
 
+print("Tenure-wise churn chart saved successfully!")
 #plt.show()
 
 # ----------------------------------------
@@ -311,7 +338,14 @@ plt.ylim(0, 55)
 plt.xticks(rotation=20, ha="right")
 plt.grid(axis="y", linestyle="--", alpha=0.4)
 plt.tight_layout()
+# Save payment method-wise churn chart
+plt.savefig(
+    "reports/figures/04_churn_by_payment_method.png",
+    dpi=300,
+    bbox_inches="tight"
+)
 
+print("Payment method churn chart saved successfully!")
 
 #plt.show()
 
@@ -1185,6 +1219,32 @@ correlation_matrix = numerical_df.corr()
 print("\nCorrelation Matrix:")
 print(correlation_matrix.round(2))
 
+# -----------------------------------------
+# Visualization: Numerical Feature Correlation Heatmap
+# -----------------------------------------
+
+plt.figure(figsize=(8, 6))
+
+sns.heatmap(
+    correlation_matrix,
+    annot=True,
+    cmap="coolwarm",
+    fmt=".2f",
+    linewidths=0.5
+)
+
+plt.title("Correlation Heatmap of Numerical Features")
+plt.tight_layout()
+
+plt.savefig(
+    "reports/figures/05_correlation_heatmap.png",
+    dpi=300,
+    bbox_inches="tight"
+)
+
+print("Correlation heatmap saved successfully!")
+
+# plt.show()
 
 # ----------------------------------------
 # Analysis: Correlation of Numerical Features with Churn
@@ -1220,3 +1280,33 @@ print(df.columns.tolist())
 
 print("\nDataset Data Types:")
 print(df.dtypes)
+
+# ----------------------------------------
+# Machine Learning: Create Feature Dataset
+# ----------------------------------------
+
+# Create a separate copy for machine learning
+ml_df = df.copy()
+
+# Remove customer ID and exploration-only column
+ml_df = ml_df.drop(columns=["customerID", "TenureGroup"])
+
+# Separate features and target
+X = ml_df.drop(columns=["Churn"])
+y = ml_df["Churn"]
+
+# Display dataset shapes
+print("\nFeature Dataset Shape:", X.shape)
+print("Target Dataset Shape:", y.shape)
+
+# ----------------------------------------
+# Machine Learning: Identify Categorical Features
+# ----------------------------------------
+
+# Select categorical columns from the feature dataset
+categorical_columns = X.select_dtypes(include=["str", "object"]).columns
+
+print("\nCategorical Columns:")
+print(categorical_columns.tolist())
+
+print("\nNumber of Categorical Columns:", len(categorical_columns))
