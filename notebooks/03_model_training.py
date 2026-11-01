@@ -217,3 +217,38 @@ cm_balanced = confusion_matrix(y_test, y_pred_balanced)
 
 print("\nBalanced Logistic Regression Confusion Matrix:")
 print(cm_balanced)
+
+
+#Classification Report for Balanced Logistic Regression
+
+print("\nBalanced Logistic Regression Classification Report:")
+print(
+    classification_report(
+        y_test,
+        y_pred_balanced,
+        target_names=["No Churn", "Churn"]
+    )
+)
+
+
+# Evaluate Models Using ROC-AUC Score
+
+from sklearn.metrics import roc_auc_score
+
+# Generate probability predictions
+y_prob_logistic = logistic_model.predict_proba(X_test)[:, 1]
+y_prob_tree = decision_tree_model.predict_proba(X_test)[:, 1]
+y_prob_rf = random_forest_model.predict_proba(X_test)[:, 1]
+y_prob_balanced = balanced_logistic_model.predict_proba(X_test)[:, 1]
+
+# Calculate ROC-AUC scores
+auc_logistic = roc_auc_score(y_test, y_prob_logistic)
+auc_tree = roc_auc_score(y_test, y_prob_tree)
+auc_rf = roc_auc_score(y_test, y_prob_rf)
+auc_balanced = roc_auc_score(y_test, y_prob_balanced)
+
+print("\nROC-AUC Comparison:")
+print("Logistic Regression:", auc_logistic)
+print("Decision Tree:", auc_tree)
+print("Random Forest:", auc_rf)
+print("Balanced Logistic Regression:", auc_balanced)
