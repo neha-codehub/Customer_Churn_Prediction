@@ -268,3 +268,16 @@ joblib.dump(
 )
 
 print("\nFinal Selected Model Saved Successfully!")
+
+
+
+#Load the Saved Model and Test Predictions
+
+loaded_model = joblib.load("models/balanced_logistic_model.pkl")
+
+test_predictions = loaded_model.predict(X_test.head(5))
+
+print("\nSaved Model Loaded Successfully!")
+
+print("\nPredictions from Saved Model:")
+print(test_predictions)
