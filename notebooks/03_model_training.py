@@ -252,3 +252,19 @@ print("Logistic Regression:", auc_logistic)
 print("Decision Tree:", auc_tree)
 print("Random Forest:", auc_rf)
 print("Balanced Logistic Regression:", auc_balanced)
+
+
+
+# Save the Final Selected Model
+
+import os
+import joblib
+
+os.makedirs("models", exist_ok=True)
+
+joblib.dump(
+    balanced_logistic_model,
+    "models/balanced_logistic_model.pkl"
+)
+
+print("\nFinal Selected Model Saved Successfully!")
