@@ -281,3 +281,48 @@ print("\nSaved Model Loaded Successfully!")
 
 print("\nPredictions from Saved Model:")
 print(test_predictions)
+
+
+# Compare All Trained Models
+
+model_comparison = pd.DataFrame({
+    "Model": [
+        "Logistic Regression",
+        "Decision Tree",
+        "Random Forest",
+        "Balanced Logistic Regression"
+    ],
+    "Accuracy": [
+        accuracy,
+        accuracy_tree,
+        accuracy_rf,
+        accuracy_balanced
+    ],
+    "Precision": [
+        precision,
+        precision_tree,
+        precision_rf,
+        precision_balanced
+    ],
+    "Recall": [
+        recall,
+        recall_tree,
+        recall_rf,
+        recall_balanced
+    ],
+    "F1 Score": [
+        f1,
+        f1_tree,
+        f1_rf,
+        f1_balanced
+    ],
+    "ROC-AUC": [
+        auc_logistic,
+        auc_tree,
+        auc_rf,
+        auc_balanced
+    ]
+})
+
+print("\nModel Comparison:")
+print(model_comparison.round(3).to_string(index=False))
