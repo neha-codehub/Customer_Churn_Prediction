@@ -110,3 +110,19 @@ print(y_test.head(10).tolist())
 
 print("\nFirst 10 Decision Tree Predictions:")
 print(y_pred_tree[:10])
+
+
+#Evaluate Decision Tree Performance
+
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+
+accuracy_tree = accuracy_score(y_test, y_pred_tree)
+precision_tree = precision_score(y_test, y_pred_tree)
+recall_tree = recall_score(y_test, y_pred_tree)
+f1_tree = f1_score(y_test, y_pred_tree)
+
+print("\nDecision Tree Model Performance:")
+print("Accuracy:", accuracy_tree)
+print("Precision:", precision_tree)
+print("Recall:", recall_tree)
+print("F1 Score:", f1_tree)
